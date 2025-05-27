@@ -1,0 +1,24 @@
+현재 프로젝트에 ENV 설정을 하지 않은 상태
+추후에 ENV 설정이 필요하다면
+
+1. dotenv 모듈 설치
+npm install dotenv
+npm install -D @types/dotenv
+
+2. /src/server.ts 코드 수정
+// 아래 2줄을 코드 최상위(중요) 에 추가
+import dotenv from 'dotenv';
+dotenv.config();
+import app from './app';
+import { getServerConfig, getDatabaseConfig } from './config';
+const dbConfig  = getDatabaseConfig();
+const svrConfig = getServerConfig();
+// 환경변수가 있으면 우선, 없으면 config 파일 사용
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : svrConfig.port;
+app.listen(PORT);
+
+3. /.env 파일 생성 후 다음과 같이 내용 작성
+PORT=3000
+NODE_ENV=development
+DATABASE_URL=sqlite://./data/app.db
+SESSION_SECRET=my-super-secret-key
