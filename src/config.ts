@@ -10,4 +10,4 @@ export const getDatabaseConfig = (): DatabaseConfig => {
     return config.get<DatabaseConfig>('database');
 };
 
-// export const fioPath = "C:/fio";
+export const fioPath = "C:/fio";

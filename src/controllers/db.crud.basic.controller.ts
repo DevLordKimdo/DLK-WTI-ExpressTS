@@ -25,7 +25,7 @@ export const createForm = async (req: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
     try {
-        let { title, content, name} = req.body;
+        let { title, content, name } = req.body;
         let form: DbCrudType = { title, content, name };
         dbCrudService.createPost(form);
         res.redirect('/tmpl' + '/db/crud/basic/list');
