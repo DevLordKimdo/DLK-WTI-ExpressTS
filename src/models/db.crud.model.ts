@@ -1,25 +1,10 @@
 import { getDatabase } from '../database/connection';
-
-
-export interface PostBoard {
-    idx: number;
-    title: string;
-    content: string;
-    name: string;
-    datetime: string;
-    hit: number;
-}
-
-export interface PostData {
-    title: string;
-    content: string;
-    name: string;
-}
+import { DbCrudType } from '../types/db.crud.type';
 
 export class DbCrudModel {
     private db = getDatabase();
 
-    getPostList(): PostBoard[] {
+    list(): DbCrudType[] {
         let query  = " SELECT idx        ";
             query += "      , title      ";
             query += "      , content    ";
@@ -28,11 +13,11 @@ export class DbCrudModel {
             query += "      , hit        ";
             query += "   FROM post_board ";
         
-        const result = this.db.prepare(query).all() as PostBoard[];
+        const result = this.db.prepare(query).all() as DbCrudType[];
         return result;
     }
 
-    getPost(idx: number): PostBoard | undefined {
+    read(idx: number): DbCrudType | undefined {
         let query  = " SELECT idx        ";
             query += "      , title      ";
             query += "      , content    ";
@@ -42,29 +27,28 @@ export class DbCrudModel {
             query += "   FROM post_board ";
             query += "  WHERE idx = :idx ";
 
-
-        const result = this.db.prepare(query).get({idx : idx}) as PostBoard | undefined;
+        const result = this.db.prepare(query).get({idx : idx}) as DbCrudType | undefined;
         return result;
     }
 
-    createPost(postData: PostData): void {
+    create(form: DbCrudType): void {
         let query  = " INSERT INTO post_board ( title,  content,  name, datetime, hit) ";
             query += "      VALUES            (:title, :content, :name, datetime('now', 'localtime'), 0) ";
         
         this.db.prepare(query).run({
-             title   : postData.title
-            ,content : postData.content
-            ,name    : postData.name
+             title   : form.title
+            ,content : form.content
+            ,name    : form.name
         });
     }
 
-    increaseHit(idx: number): void {
+    updateHit(idx: number): void {
         let query  = " UPDATE post_board SET hit = hit + 1 WHERE idx = :idx ";
 
         this.db.prepare(query).run({idx : idx});
     }
 
-    updatePost(postData: PostData, idx: number): void {
+    update(form: DbCrudType): void {
         let query    = " UPDATE post_board         ";
             query   += "    SET title   = :title   ";
             query   += "      , content = :content ";
@@ -72,10 +56,10 @@ export class DbCrudModel {
             query   += "  WHERE idx     = :idx     ";
 
         this.db.prepare(query).run({
-            title   : postData.title,
-            content : postData.content,
-            name    : postData.name,
-            idx     : idx
+            title   : form.title,
+            content : form.content,
+            name    : form.name,
+            idx     : form.idx
         });
     }
 

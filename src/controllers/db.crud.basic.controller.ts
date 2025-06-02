@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import { DbCrudModel } from '../models/db.crud.model';
+import { DbCrudService } from '../services/db.crud.basic.service';
+import { DbCrudType } from '../types/db.crud.type';
 
-const dbCrudModel = new DbCrudModel();
+const dbCrudService = new DbCrudService();
 
-export const getList = async (req: Request, res: Response) => {
+export const list = async (req: Request, res: Response) => {
     try {
-        const list = dbCrudModel.getPostList();
+        const list = dbCrudService.list();
         res.render('db/crud/basic/list', { list : list });
     } catch (error) {
         console.error('Error getting list:', error);
@@ -13,7 +14,7 @@ export const getList = async (req: Request, res: Response) => {
     }
 };
 
-export const getCreateForm = async (req: Request, res: Response) => {
+export const createForm = async (req: Request, res: Response) => {
     try {
         res.render('db/crud/basic/create', { });
     } catch (error) {
@@ -24,8 +25,9 @@ export const getCreateForm = async (req: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
     try {
-        let { title, content, name } = req.body;
-        dbCrudModel.createPost({ title, content, name });
+        let { title, content, name} = req.body;
+        let form: DbCrudType = { title, content, name };
+        dbCrudService.createPost(form);
         res.redirect('/tmpl' + '/db/crud/basic/list');
     } catch (error) {
         console.error('Error getting list:', error);
@@ -33,11 +35,11 @@ export const createPost = async (req: Request, res: Response) => {
     }
 };
 
-export const getPost = async (req: Request, res: Response) => {
+export const read = async (req: Request, res: Response) => {
     try {
         let idx : number = parseInt(req.params.idx,10);
-        dbCrudModel.increaseHit(idx);
-        let read = dbCrudModel.getPost(idx);
+        dbCrudService.updateHit(idx);
+        let read = dbCrudService.read(idx);
         res.render('db/crud/basic/read', { read : read });
     } catch (error) {
         console.error('Error getting list:', error);
@@ -45,11 +47,12 @@ export const getPost = async (req: Request, res: Response) => {
     }
 };
 
-export const updatePost = async (req: Request, res: Response) => {
+export const update = async (req: Request, res: Response) => {
     try {
         let idx : number = parseInt(req.params.idx,10);
         let { title, content, name } = req.body;
-        dbCrudModel.updatePost({ title, content, name } , idx);
+        let form : DbCrudType = { idx, title, content, name };
+        dbCrudService.update(form);
         res.redirect('/tmpl' + '/db/crud/basic/read/' + idx);
     } catch (error) {
         console.error('Error getting list:', error);
@@ -60,7 +63,7 @@ export const updatePost = async (req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
     try {
         let idx : number = parseInt(req.params.idx,10);
-        dbCrudModel.deletePost(idx);
+        dbCrudService.deletePost(idx);
         res.redirect('/tmpl' + '/db/crud/basic/list');
     } catch (error) {
         console.error('Error getting list:', error);
