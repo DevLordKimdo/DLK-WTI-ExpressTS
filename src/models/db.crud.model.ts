@@ -17,7 +17,7 @@ export class DbCrudModel {
         return result;
     }
 
-    read(idx: number): DbCrudType | undefined {
+    read(idx: number): DbCrudType {
         let query  = " SELECT idx        ";
             query += "      , title      ";
             query += "      , content    ";
@@ -27,18 +27,18 @@ export class DbCrudModel {
             query += "   FROM post_board ";
             query += "  WHERE idx = :idx ";
 
-        const result = this.db.prepare(query).get({idx : idx}) as DbCrudType | undefined;
+        const result = this.db.prepare(query).get({idx : idx}) as DbCrudType;
         return result;
     }
 
-    create(form: DbCrudType): void {
+    create(params: DbCrudType): void {
         let query  = " INSERT INTO post_board ( title,  content,  name, datetime, hit) ";
             query += "      VALUES            (:title, :content, :name, datetime('now', 'localtime'), 0) ";
         
         this.db.prepare(query).run({
-             title   : form.title
-            ,content : form.content
-            ,name    : form.name
+             title   : params.title
+            ,content : params.content
+            ,name    : params.name
         });
     }
 
@@ -48,7 +48,7 @@ export class DbCrudModel {
         this.db.prepare(query).run({idx : idx});
     }
 
-    update(form: DbCrudType): void {
+    update(params: DbCrudType): void {
         let query    = " UPDATE post_board         ";
             query   += "    SET title   = :title   ";
             query   += "      , content = :content ";
@@ -56,10 +56,10 @@ export class DbCrudModel {
             query   += "  WHERE idx     = :idx     ";
 
         this.db.prepare(query).run({
-            title   : form.title,
-            content : form.content,
-            name    : form.name,
-            idx     : form.idx
+            title   : params.title,
+            content : params.content,
+            name    : params.name,
+            idx     : params.idx
         });
     }
 

@@ -2,7 +2,7 @@ import fsPromises from 'fs/promises';
 import fs         from 'fs';
 import { FioCrudType } from '../types/fio.crud.type';
 
-export class FioCrudService {
+export class FioCrudBasicService {
 
     async list(fioPath: string): Promise<FioCrudType[]> {
         let list : FioCrudType[] = [];

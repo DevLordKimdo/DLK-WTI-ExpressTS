@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { FioCrudService } from '../services/fio.crud.basic.service';
+import { FioCrudBasicService } from '../services/fio.crud.basic.service';
 import { FioCrudType } from '../types/fio.crud.type';
 import { fioPath } from '../config';
 
-const fioCrudService = new FioCrudService();
+const fioCrudBasicService = new FioCrudBasicService();
 
 export const list = async (req: Request, res: Response) => {
     try {
-        let list = await fioCrudService.list(fioPath);
+        let list = await fioCrudBasicService.list(fioPath);
         res.render('fio/crud/basic/list', { list : list });
     } catch (error) {
         console.error('Error getting list:', error);
@@ -29,7 +29,7 @@ export const createFile = async (req: Request, res: Response) => {
     try {
         let { name, content } = req.body;
         let form: FioCrudType = { name, content };
-        fioCrudService.create(fioPath, form);
+        fioCrudBasicService.create(fioPath, form);
         res.redirect('/tmpl' + '/fio/crud/basic/list');
     } catch (error) {
         console.error('Error getting list:', error);
@@ -40,7 +40,7 @@ export const createFile = async (req: Request, res: Response) => {
 export const read = async (req: Request, res: Response) => {
     try {
         let fileName: string = req.params.name;
-        let read: FioCrudType = await fioCrudService.read(fioPath, fileName);
+        let read: FioCrudType = await fioCrudBasicService.read(fioPath, fileName);
         res.render('fio/crud/basic/read', {read : read});
     } catch (error) {
         console.error('Error getting list:', error);
@@ -53,7 +53,7 @@ export const update = async (req: Request, res: Response) => {
         let preName = req.params.preName;
         let { name, content } = req.body;
         let form: FioCrudType = { name, content };
-        await fioCrudService.update(fioPath, preName, form);
+        await fioCrudBasicService.update(fioPath, preName, form);
         res.redirect('/tmpl' + '/fio/crud/basic/read/' + name);
     } catch (error) {
         console.error('Error getting list:', error);
@@ -64,7 +64,7 @@ export const update = async (req: Request, res: Response) => {
 export const deleteFile = async (req: Request, res: Response) => {
     try {
         let name = req.params.name;
-        await fioCrudService.deleteFile(fioPath, name);
+        await fioCrudBasicService.deleteFile(fioPath, name);
         res.redirect('/tmpl' + '/fio/crud/basic/list');
     } catch (error) {
         console.error('Error getting list:', error);

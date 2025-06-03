@@ -1,7 +1,7 @@
 import { DbCrudModel } from '../models/db.crud.model';
 import { DbCrudType } from '../types/db.crud.type';
 
-export class DbCrudService {
+export class DbCrudBasicService {
     private dbCrudModel = new DbCrudModel();
 
     list(): DbCrudType[] {
@@ -16,7 +16,7 @@ export class DbCrudService {
         this.dbCrudModel.updateHit(idx);
     }
 
-    read(idx : number): DbCrudType | undefined {
+    read(idx : number): DbCrudType {
         return this.dbCrudModel.read(idx);
     }
 

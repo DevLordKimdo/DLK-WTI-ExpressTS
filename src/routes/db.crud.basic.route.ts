@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import * as dbCrudController from '../controllers/db.crud.basic.controller';
+import * as dbCrudBasicController from '../controllers/db.crud.basic.controller';
 
 const router = Router();
 
-router.get(['/', '/list'], dbCrudController.list);
-router.get('/create', dbCrudController.createForm);
-router.post('/create', dbCrudController.createPost);
-router.get('/read/:idx', dbCrudController.read);
-router.post('/update/:idx', dbCrudController.update);
-router.get('/delete/:idx', dbCrudController.deletePost);
+router.get(['/', '/list'], dbCrudBasicController.list);
+router.get('/create', dbCrudBasicController.createForm);
+router.post('/create', dbCrudBasicController.createPost);
+router.get('/read/:idx', dbCrudBasicController.read);
+router.post('/update/:idx', dbCrudBasicController.update);
+router.get('/delete/:idx', dbCrudBasicController.deletePost);
 
 export default router;

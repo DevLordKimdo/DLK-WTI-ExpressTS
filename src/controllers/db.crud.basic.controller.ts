@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { DbCrudService } from '../services/db.crud.basic.service';
+import { DbCrudBasicService } from '../services/db.crud.basic.service';
 import { DbCrudType } from '../types/db.crud.type';
 
-const dbCrudService = new DbCrudService();
+const dbCrudBasicService = new DbCrudBasicService();
 
 export const list = async (req: Request, res: Response) => {
     try {
-        const list = dbCrudService.list();
+        const list = dbCrudBasicService.list();
         res.render('db/crud/basic/list', { list : list });
     } catch (error) {
         console.error('Error getting list:', error);
@@ -27,7 +27,7 @@ export const createPost = async (req: Request, res: Response) => {
     try {
         let { title, content, name } = req.body;
         let form: DbCrudType = { title, content, name };
-        dbCrudService.createPost(form);
+        dbCrudBasicService.createPost(form);
         res.redirect('/tmpl' + '/db/crud/basic/list');
     } catch (error) {
         console.error('Error getting list:', error);
@@ -38,8 +38,8 @@ export const createPost = async (req: Request, res: Response) => {
 export const read = async (req: Request, res: Response) => {
     try {
         let idx : number = parseInt(req.params.idx,10);
-        dbCrudService.updateHit(idx);
-        let read = dbCrudService.read(idx);
+        dbCrudBasicService.updateHit(idx);
+        let read = dbCrudBasicService.read(idx);
         res.render('db/crud/basic/read', { read : read });
     } catch (error) {
         console.error('Error getting list:', error);
@@ -52,7 +52,7 @@ export const update = async (req: Request, res: Response) => {
         let idx : number = parseInt(req.params.idx,10);
         let { title, content, name } = req.body;
         let form : DbCrudType = { idx, title, content, name };
-        dbCrudService.update(form);
+        dbCrudBasicService.update(form);
         res.redirect('/tmpl' + '/db/crud/basic/read/' + idx);
     } catch (error) {
         console.error('Error getting list:', error);
@@ -63,7 +63,7 @@ export const update = async (req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
     try {
         let idx : number = parseInt(req.params.idx,10);
-        dbCrudService.deletePost(idx);
+        dbCrudBasicService.deletePost(idx);
         res.redirect('/tmpl' + '/db/crud/basic/list');
     } catch (error) {
         console.error('Error getting list:', error);

@@ -1,4 +1,3 @@
-
 import config from 'config';
 import { DatabaseConfig, ServerConfig } from './types/config.type';
 
@@ -10,4 +9,4 @@ export const getDatabaseConfig = (): DatabaseConfig => {
     return config.get<DatabaseConfig>('database');
 };
 
-export const fioPath = "C:/fio";
+export const fioPath: string = "C:/fio";
