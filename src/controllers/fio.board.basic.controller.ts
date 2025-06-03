@@ -17,6 +17,8 @@ export const list = async (req: Request, res: Response) => {
 
 export const upload = async (req: Request, res: Response) => {
     try {
+        let files = req.files as Express.Multer.File[];
+        fioBoardBasicService.upload(files);
         res.redirect('/tmpl' + '/fio/board/basic/list');
     } catch (error) {
         console.error('Error getting list:', error);

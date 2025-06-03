@@ -23,9 +23,8 @@ export class FioBoardModel {
 		    query += " 	   		   ELSE MAX(group_idx) + 1            ";
 		    query += "         END AS NewPostIdx                      ";
 		    query += "   FROM file_board                              ";
-
-            const result = this.db.prepare(query).get() as number;
-            return result;
+            const result = this.db.prepare(query).get() as { NewPostIdx: number };
+            return result.NewPostIdx;
     }
 
     upload(params: FioBoardType): void {
