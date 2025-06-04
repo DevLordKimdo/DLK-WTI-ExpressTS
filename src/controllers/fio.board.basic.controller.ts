@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import { FioBoardBasicService } from '../services/fio.board.basic.service';
-import { FioCrudType } from '../types/fio.crud.type';
-import { fioPath } from '../config';
 
 const fioBoardBasicService = new FioBoardBasicService();
 
