@@ -68,4 +68,18 @@ export class DbCrudModel {
 
         this.db.prepare(query).run({idx : idx});
     }
+
+    createReturnIdx(params: DbCrudType): number {
+        let query  = " INSERT INTO post_board ( title,  content,  name, datetime, hit) ";
+            query += "      VALUES            (:title, :content, :name, datetime('now', 'localtime'), 0) ";
+        
+        let result = this.db.prepare(query).run({
+             title   : params.title
+            ,content : params.content
+            ,name    : params.name
+        });
+
+        return result.lastInsertRowid as number;
+    }
+
 }

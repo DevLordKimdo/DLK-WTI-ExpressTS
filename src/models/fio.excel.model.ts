@@ -24,3 +24,5 @@ export class FioExcelModel {
         this.db.prepare(qry).run( values );
     }
 }
+
+// 중요. DB INSERT 시 한번에 2개 이상의 데이터를 INSERT 하는 쿼리문 작성하는 코드

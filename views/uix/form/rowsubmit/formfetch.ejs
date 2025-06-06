@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uix Form Rowsubmit Formfetch</title>
+</head>
+<link rel="stylesheet" href="/css/styles.css">
+<body>
+	<form name="form">
+		<table>
+		    <colgroup> 
+		    	<col style="width: 10%;"/>
+		        <col style="width: 40%;"/>
+		        <col style="width: 20%;"/>
+		        <col style="width: 20%;"/>
+		        <col style="width: 10%;"/>
+		    </colgroup>
+			<thead>
+			    <tr>
+			        <th>
+			        	<button type="button" onclick="fn_submitJson()">전송(Json)</button>
+			        </th>
+			        <th>제목</th>
+			        <th>이름</th>
+			        <th>내용</th>
+			        <th><button type="button" onclick="fn_addRow()">추가</button></th>
+			    </tr>
+		    </thead>
+		    <tbody class="tbodyMain">
+		    </tbody>
+		</table>
+	</form>
+	<!-- hidden -->
+	<table>
+	    <tbody>
+			<tr class="trTemplate" id="trQueue" style="display: none;">
+				<td><span class="num">Queue</span></td>
+				<td><input type="text" name="title" id="titleQueue"></td>
+				<td><input type="text" name="name" id="nameQueue"></td>
+				<td><textarea name="content" id="contentQueue"></textarea></td>
+				<td>
+					<button type="button" id="deleteRow" onclick="fn_deleteRow(Queue)">삭제</button>
+					<button type="button" id="copyRow" onclick="fn_copyRow(Queue)">복사</button>
+				</td>
+		    </tr>
+	    </tbody>
+	</table>
+</body>
+<script>
+	let Queue = 1;
+
+	function auto_initializationRow() {
+		for(i=1; i<4; i++) {
+			fn_addRow();
+		}
+	} auto_initializationRow();
+
+	function fn_addRow() {
+		// 구현방법 2 채택
+		let rowTemplate = document.querySelector('.trTemplate').outerHTML;
+		let tableBody = document.querySelector('.tbodyMain');
+		let newRow = document.createElement('tr');
+		newRow.className = 'newRow'; // 클래스 이름 할당
+		newRow.id = "tr"+Queue; //id 값 할당
+		newRow.innerHTML = rowTemplate;
+				
+		// 각각 항목들에 대한 순차번호 값 할당
+		newRow.querySelector('.num').textContent=Queue;
+	    newRow.querySelector('#titleQueue').id="title"+Queue;
+	    newRow.querySelector('#nameQueue').id="name"+Queue;
+	    newRow.querySelector('#contentQueue').id="content"+Queue;
+	    newRow.querySelector('#deleteRow').setAttribute("onclick", "fn_deleteRow("+Queue+")");
+	    newRow.querySelector('#copyRow').setAttribute("onclick", "fn_copyRow("+Queue+")");
+	    	    
+	    Queue = Queue + 1;
+		
+		tableBody.appendChild(newRow);
+	}
+		
+	// 태그를 완전히 삭제
+	function fn_deleteRow(num) {
+		// 해당 태그를 완전히 삭제하는 방식
+		let rowToDelete = document.getElementById('tr'+num);
+		// 태그 삭제
+		if (rowToDelete) { rowToDelete.parentNode.removeChild(rowToDelete); }
+	}
+	
+	// 복사 기능 구현
+	function fn_copyRow(num) {
+		let rowTemplate = document.querySelector('.trTemplate').outerHTML;
+		let tableBody = document.querySelector('.tbodyMain');
+		let newRow = document.createElement('tr');
+		newRow.className = 'newRow'; // 클래스 이름 할당
+		newRow.id = "tr"+Queue; //id 값 할당
+		newRow.innerHTML = rowTemplate;
+		
+		// 각각 항목들에 대한 순차번호 값 할당
+		newRow.querySelector('.num').textContent=Queue;
+	    newRow.querySelector('#titleQueue').id="title"+Queue;
+	    newRow.querySelector('#nameQueue').id="name"+Queue;
+	    newRow.querySelector('#contentQueue').id="content"+Queue;
+	    newRow.querySelector('#deleteRow').setAttribute("onclick", "fn_deleteRow("+Queue+")");
+	    newRow.querySelector('#copyRow').setAttribute("onclick", "fn_copyRow("+Queue+")");
+	    
+	    // 각각 항목들에 대한 value 값 할당
+	    newRow.querySelector('#title'+Queue).value = document.getElementById('title'+num).value;
+	    newRow.querySelector('#name'+Queue).value = document.getElementById('name'+num).value;
+	    newRow.querySelector('#content'+Queue).value = document.getElementById('content'+num).value;
+	    
+	    Queue = Queue + 1;
+		
+		tableBody.appendChild(newRow);
+	}
+		
+	function fn_submitJson() {
+		// Fetch 문으로 전송하기 위한 객체배열 생성
+		let list = [];
+		for(let i = 0; i < document.form.title.length; i++) {
+			list.push({
+		          title   : document.form.title[i].value
+		        , name    : document.form.name[i].value
+		        , content : document.form.content[i].value
+			});
+		}
+		
+		// JSON 데이터로 전송하기
+		fetch('/tmpl/uix/form/row-submit/submit-fetch', {
+		    method: 'POST',
+		    headers: { 'Content-Type': 'application/json' },
+		    body: JSON.stringify({ list: list })
+		})
+		.then(response => response.text())
+		.then(data => {
+			console.log(data);
+		});
+	}
+
+</script>
+</html>
