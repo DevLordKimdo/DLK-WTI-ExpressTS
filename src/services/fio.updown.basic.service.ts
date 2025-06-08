@@ -21,8 +21,8 @@ export class FioUpdownBasicService {
             try {
                 await fsPromises.rm(filePath);
                 console.log(deleteTarget + ' 파일이 삭제되었습니다.');
-            } catch (err) {
-                console.log(deleteTarget + ' 파일 삭제에 실패했습니다.' + err);
+            } catch (error) {
+                console.log(deleteTarget + ' 파일 삭제에 실패했습니다.' + error);
             }
         } else {
             console.log(deleteTarget + ' 파일이 존재하지 않습니다.');
