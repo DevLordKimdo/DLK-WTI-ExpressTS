@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import mainRoutes from './main.route';
+import authCookieBasicRoute from './auth.cookie.basic.route';
+import authSessionBasicRoute from './auth.session.basic.route';
 import dbCrudBasicRoutes from './db.crud.basic.route';
 import dbCrudReturnIdxRoutes from './db.crud.returnidx.route';
 import dbFormRowSubmitRoute from './db.form.rowsubmit.route';
@@ -15,6 +17,8 @@ import uixFormRowSubmitRoute from './uix.form.rowsubmit.route';
 const router = Router();
 
 router.use('/', mainRoutes);
+router.use('/tmpl/auth/cookie/basic', authCookieBasicRoute);
+router.use('/tmpl/auth/session/basic', authSessionBasicRoute);
 router.use('/tmpl/db/crud/basic', dbCrudBasicRoutes);
 router.use('/tmpl/db/crud/return-idx', dbCrudReturnIdxRoutes);
 router.use('/tmpl/db/form/row-submit', dbFormRowSubmitRoute);

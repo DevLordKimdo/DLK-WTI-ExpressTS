@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.11",
     "@types/config": "^3.3.5",
+    "@types/connect-sqlite3": "^0.9.5",
     "@types/cookie-parser": "^1.4.7",
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.0",
