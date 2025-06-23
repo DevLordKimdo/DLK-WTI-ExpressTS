@@ -16,6 +16,12 @@ try {
     process.exit(1);
 }
 
-app.listen(PORT, () => {
+// 웹소켓 설정
+import { createServer } from 'http';
+import { setupWebSocket } from './websocket/web.socket.setup';
+const server = createServer(app);
+setupWebSocket(server);
+
+server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

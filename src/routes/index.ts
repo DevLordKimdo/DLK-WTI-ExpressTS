@@ -20,7 +20,7 @@ import uixIframeBasicRoute from './uix.iframe.basic.route';
 import uixPopupModalRoute from './uix.popup.modal.route';
 import uixPopupSendvalueRoute from './uix.popup.sendvalue.route';
 import uixPaginationBasicRoute from './uix.pagination.basic.route';
-
+import wsConnectBasicRoute from './ws.connect.basic.route';
 
 const router = Router();
 
@@ -45,5 +45,6 @@ router.use('/tmpl/uix/iframe/basic', uixIframeBasicRoute);
 router.use('/tmpl/uix/popup/modal', uixPopupModalRoute);
 router.use('/tmpl/uix/popup/send-value', uixPopupSendvalueRoute);
 router.use('/tmpl/uix/pagination/basic', uixPaginationBasicRoute);
+router.use('/tmpl/ws/connect/basic', wsConnectBasicRoute);
 
 export default router;
