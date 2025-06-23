@@ -7,12 +7,15 @@ import dbCrudReturnIdxRoutes from './db.crud.returnidx.route';
 import dbFormRowSubmitRoute from './db.form.rowsubmit.route';
 import dbSearchBasicRoute from './db.search.basic.route';
 import dbTransactionalBasicRoute from './db.transactional.basic.route';
+import logicHttpPrgPatternRoute from './logic.http.prgpattern.route';
 import fioCrudBasicRoutes from './fio.crud.basic.route';
 import fioBoardBasicRoutes from './fio.board.basic.route';
 import fioUpdownBasicRoutes from './fio.updown.basic.route';
 import fioExcelExportRoutes from './fio.excel.export.route';
 import fioExcelInportRoutes from './fio.excel.inport.route';
 import uixFormRowSubmitRoute from './uix.form.rowsubmit.route';
+import uixFormCheckboxRoute from './uix.form.checkbox.route';
+import uixFormInputdisableRoute from './uix.form.inputdisable.route';
 
 const router = Router();
 
@@ -24,11 +27,14 @@ router.use('/tmpl/db/crud/return-idx', dbCrudReturnIdxRoutes);
 router.use('/tmpl/db/form/row-submit', dbFormRowSubmitRoute);
 router.use('/tmpl/db/search/basic', dbSearchBasicRoute);
 router.use('/tmpl/db/transactional/basic', dbTransactionalBasicRoute);
+router.use('/tmpl/logic/http/prg-pattern', logicHttpPrgPatternRoute);
 router.use('/tmpl/fio/crud/basic', fioCrudBasicRoutes);
 router.use('/tmpl/fio/board/basic', fioBoardBasicRoutes);
 router.use('/tmpl/fio/updown/basic', fioUpdownBasicRoutes);
 router.use('/tmpl/fio/excel/export', fioExcelExportRoutes);
 router.use('/tmpl/fio/excel/inport', fioExcelInportRoutes);
 router.use('/tmpl/uix/form/row-submit', uixFormRowSubmitRoute);
+router.use('/tmpl/uix/form/checkbox', uixFormCheckboxRoute);
+router.use('/tmpl/uix/form/input-disable', uixFormInputdisableRoute);
 
 export default router;

@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 // 세션 설정
-const session = require('express-session');
+const session     = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(session);
 
 // EJS 템플릿 엔진 설정
@@ -35,8 +35,5 @@ app.use(session({
 // app.use('/', require('./routes'));
 import mainRoutes from './routes';
 app.use('/', mainRoutes);
-
-// 세션 관련 타입 설정
-import './types/session';
 
 export default app;
