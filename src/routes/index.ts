@@ -16,6 +16,9 @@ import fioExcelInportRoutes from './fio.excel.inport.route';
 import uixFormRowSubmitRoute from './uix.form.rowsubmit.route';
 import uixFormCheckboxRoute from './uix.form.checkbox.route';
 import uixFormInputdisableRoute from './uix.form.inputdisable.route';
+import uixIframeBasicRoute from './uix.iframe.basic.route';
+import uixPopupModalRoute from './uix.popup.modal.route';
+import uixPopupSendvalueRoute from './uix.popup.sendvalue.route';
 
 const router = Router();
 
@@ -36,5 +39,8 @@ router.use('/tmpl/fio/excel/inport', fioExcelInportRoutes);
 router.use('/tmpl/uix/form/row-submit', uixFormRowSubmitRoute);
 router.use('/tmpl/uix/form/checkbox', uixFormCheckboxRoute);
 router.use('/tmpl/uix/form/input-disable', uixFormInputdisableRoute);
+router.use('/tmpl/uix/iframe/basic', uixIframeBasicRoute);
+router.use('/tmpl/uix/popup/modal', uixPopupModalRoute);
+router.use('/tmpl/uix/popup/send-value', uixPopupSendvalueRoute);
 
 export default router;
