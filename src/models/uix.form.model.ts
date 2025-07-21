@@ -1,5 +1,6 @@
 import { getDatabase } from '../database/connection';
 import { DbCrudType } from '../types/db.crud.type';
+import { UixFormType } from '../types/uix.form.type';
 
 export class UixFormModel {
     private db = getDatabase();
@@ -13,7 +14,7 @@ export class UixFormModel {
             this.db.prepare(query).run({ idx : params });
     }
 
-    updateMulti(idxList: string, params: DbCrudType): void {
+    updateMulti(params: UixFormType): void {
         let query  = " UPDATE post_board SET                   ";
             query += "        title    =   :title              ";
             query += "      , name     =   :name               ";
@@ -26,7 +27,7 @@ export class UixFormModel {
                 ,name    : params.name
                 ,content : params.content
                 ,hit     : params.hit
-                ,idx     : idxList
+                ,idx     : params.checkIdx
             });
     }
 

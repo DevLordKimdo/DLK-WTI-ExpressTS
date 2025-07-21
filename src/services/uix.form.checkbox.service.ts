@@ -1,12 +1,12 @@
 import { DbCrudModel } from '../models/db.crud.model';
 import { UixFormModel } from '../models/uix.form.model';
-import { DbCrudType } from '../types/db.crud.type';
+import { UixFormType } from '../types/uix.form.type';
 
 export class UixFormCheckboxService {
     private dbCrudModel = new DbCrudModel();
     private uixFormModel = new UixFormModel();
 
-    list(): DbCrudType[] {
+    list(): UixFormType[] {
         return this.dbCrudModel.list();
     }
 
@@ -14,8 +14,8 @@ export class UixFormCheckboxService {
         this.uixFormModel.createCopy(idxList);
     }
 
-    update(idxList: string, form: DbCrudType): void {
-        this.uixFormModel.updateMulti(idxList, form);
+    update(form: UixFormType): void {
+        this.uixFormModel.updateMulti(form);
     }
 
     delete(idxList : string): void {

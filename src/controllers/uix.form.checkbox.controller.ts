@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { UixFormCheckboxService } from '../services/uix.form.checkbox.service';
-import { DbCrudType } from '../types/db.crud.type';
+import { UixFormType } from '../types/uix.form.type';
 
 const uixFormCheckboxService = new UixFormCheckboxService();
 
@@ -35,11 +35,11 @@ export const copy = async (req: Request, res: Response) => {
 
 export const update = async (req: Request, res: Response) => {
     try {
-        let checkIdx = Array.isArray(req.body.checkIdx) ? req.body.checkIdx : [req.body.checkIdx];
-        let idxList: string = JSON.stringify(checkIdx);
+        let idxList = Array.isArray(req.body.checkIdx) ? req.body.checkIdx : [req.body.checkIdx];
+        let checkIdx: string = JSON.stringify(idxList);
         let {title, name, content, hit} = req.body;
-        let form: DbCrudType = {title, name, content, hit};
-        uixFormCheckboxService.update(idxList, form);
+        let form: UixFormType = {title, name, content, hit, checkIdx};
+        uixFormCheckboxService.update(form);
 
         res.redirect('/tmpl' + '/uix/form/checkbox/list');
     } catch (error) {
@@ -51,8 +51,8 @@ export const update = async (req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
     try {
         let checkIdx: string = Array.isArray(req.body.checkIdx) ? req.body.checkIdx : [req.body.checkIdx];
-            checkIdx = JSON.stringify(checkIdx);
-        uixFormCheckboxService.delete(checkIdx);
+        let idxList = JSON.stringify(checkIdx);
+        uixFormCheckboxService.delete(idxList);
         res.redirect('/tmpl' + '/uix/form/checkbox/list');
     } catch (error) {
         console.error('Error getting list:', error);
