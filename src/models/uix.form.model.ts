@@ -1,5 +1,4 @@
 import { getDatabase } from '../database/connection';
-import { DbCrudType } from '../types/db.crud.type';
 import { UixFormType } from '../types/uix.form.type';
 
 export class UixFormModel {
