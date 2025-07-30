@@ -17,7 +17,7 @@ export class DbTransactionalModel {
                 ,name    : params.name
             });
 
-            if(errorOption == 'Y') {
+            if(errorOption == 'true') {
                 this.db.prepare(query).run({
                     title   : errorParams.title
                     ,content : errorParams.content

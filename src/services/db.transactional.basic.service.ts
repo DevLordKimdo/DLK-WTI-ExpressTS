@@ -8,11 +8,11 @@ export class DbTransactionalBasicService {
     private dbCrudModel = new DbCrudModel();
 
     submit(form: DbSearchType, errorForm: DbSearchType, errorOption: string, transOption: string): void {
-        if(transOption == 'Y') {
+        if(transOption == 'true') {
             this.dbTransactionalModel.createWithTrans(form, errorForm, errorOption);
         } else { 
             this.dbCrudModel.create(form);
-            if(errorOption == 'Y') { this.dbCrudModel.create(errorForm); }
+            if(errorOption == 'true') { this.dbCrudModel.create(errorForm); }
         }
         
     }
