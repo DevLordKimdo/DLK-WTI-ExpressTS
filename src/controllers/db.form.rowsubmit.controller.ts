@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { DbFormRowSubmitService } from '../services/db.form.rowsubmit.service';
+import { DbCrudType } from '../types/db.crud.type';
 
 const dbFormRowSubmitService = new DbFormRowSubmitService();
 
@@ -18,7 +19,19 @@ export const submit = async (req: Request, res: Response) => {
         let listTitle  : string[] = req.body.title;
         let listName   : string[] = req.body.name;
         let listContent: string[] = req.body.content;
-        dbFormRowSubmitService.submit(listTitle, listName, listContent);
+        let form: DbCrudType[] = [];
+
+        for(let i = 0; i < listTitle.length; i++) {
+            let temp: DbCrudType = {
+                title   : listTitle[i],
+                name    : listName[i],
+                content : listContent[i]
+            };
+            form.push(temp);
+        }
+
+        dbFormRowSubmitService.submit(form);
+        
         res.redirect('/tmpl' + '/db/form/row-submit/form');
     } catch (error) {
         console.error('Error getting list:', error);
