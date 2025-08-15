@@ -16,7 +16,7 @@ export class AuthCookieBasicService {
             httpOnly : true,               // 클라이언트 스크립트에서 접근 불가 
             secure   : isSecure,           // 보안옵션(https 연결 전용 옵션)
             domain   : serverName,         // 도메인 설정 (필요한 경우)
-            sameSite : 'lax',              // 어떤 도메인에서만 사용할 수 있는지 설정. "Strict", "Lax", "None"
+            sameSite : 'lax',              // 어떤 도메인에서만 사용할 수 있는지 설정. "strict", "Lax", "none"
         });
 
     }
