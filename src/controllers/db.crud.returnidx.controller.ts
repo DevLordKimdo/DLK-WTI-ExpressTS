@@ -16,8 +16,8 @@ export const createForm = async (req: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
     try {
-        let { title, content, name } = req.body;
-        let form: DbCrudType = { title, content, name };
+        let { title, content, username } = req.body;
+        let form: DbCrudType = { title, content, username };
         dbCrudReturnIdxService.createPost(form);
         res.redirect('/tmpl' + '/db/crud/return-idx/create');
     } catch (error) {

@@ -8,16 +8,16 @@ export class DbSearchModel {
         let query  = " SELECT idx        ";
             query += "      , title      ";
             query += "      , content    ";
-            query += "      , name       ";
+            query += "      , username   ";
             query += "      , datetime   ";
             query += "      , hit        ";
             query += "   FROM post_board ";
             query += "  WHERE 1 = 1      ";
 
             if(params.searchKeyword) {
-                     if(params.searchOption == 'title')   { query += " AND title   LIKE '%' || :searchKeyword || '%' "; }
-                else if(params.searchOption == 'content') { query += " AND content LIKE '%' || :searchKeyword || '%' "; }
-                else if(params.searchOption == 'name')    { query += " AND name    LIKE '%' || :searchKeyword || '%' "; }
+                     if(params.searchOption == 'title')    { query += " AND title    LIKE '%' || :searchKeyword || '%' "; }
+                else if(params.searchOption == 'content')  { query += " AND content  LIKE '%' || :searchKeyword || '%' "; }
+                else if(params.searchOption == 'username') { query += " AND username LIKE '%' || :searchKeyword || '%' "; }
             }
 
             if(params.searchDateStart && params.searchDateStart) {

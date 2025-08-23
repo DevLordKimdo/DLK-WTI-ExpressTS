@@ -18,7 +18,7 @@ export class FioExcelExportService {
         worksheet.columns = [
             { header: 'idx',      key: 'idx',      width: 10 },
             { header: 'title',    key: 'title',    width: 10 },
-            { header: 'name',     key: 'name',     width: 10 },
+            { header: 'username', key: 'username', width: 10 },
             { header: 'content',  key: 'content',  width: 10 },
             { header: 'datetime', key: 'datetime', width: 10 },
             { header: 'hit',      key: 'hit',      width: 10 },
@@ -30,12 +30,12 @@ export class FioExcelExportService {
         // 데이터 주입
         list.forEach(data => {
             worksheet.addRow({
-                idx     : data.idx,
-                title   : data.title,
-                name    : data.name,
-                content : data.content,
-                datetime: data.datetime,
-                hit     : data.hit
+                idx      : data.idx,
+                title    : data.title,
+                username : data.username,
+                content  : data.content,
+                datetime : data.datetime,
+                hit      : data.hit
             });
         });
 

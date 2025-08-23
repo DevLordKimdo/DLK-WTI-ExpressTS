@@ -16,16 +16,16 @@ export const form = async (req: Request, res: Response) => {
 
 export const submit = async (req: Request, res: Response) => {
     try {
-        let listTitle  : string[] = req.body.title;
-        let listName   : string[] = req.body.name;
-        let listContent: string[] = req.body.content;
+        let listTitle  : string[]  = req.body.title;
+        let listUsername: string[] = req.body.username;
+        let listContent: string[]  = req.body.content;
         let form: DbCrudType[] = [];
 
         for(let i = 0; i < listTitle.length; i++) {
             let temp: DbCrudType = {
-                title   : listTitle[i],
-                name    : listName[i],
-                content : listContent[i]
+                title    : listTitle[i],
+                username : listUsername[i],
+                content  : listContent[i]
             };
             form.push(temp);
         }

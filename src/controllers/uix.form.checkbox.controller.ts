@@ -37,8 +37,8 @@ export const update = async (req: Request, res: Response) => {
     try {
         let idxList = Array.isArray(req.body.checkIdx) ? req.body.checkIdx : [req.body.checkIdx];
         let checkIdx: string = JSON.stringify(idxList);
-        let {title, name, content, hit} = req.body;
-        let form: UixFormType = {title, name, content, hit, checkIdx};
+        let {title, username, content, hit} = req.body;
+        let form: UixFormType = {title, username, content, hit, checkIdx};
         uixFormCheckboxService.update(form);
 
         res.redirect('/tmpl' + '/uix/form/checkbox/list');

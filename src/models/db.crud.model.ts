@@ -8,7 +8,7 @@ export class DbCrudModel {
         let query  = " SELECT idx        ";
             query += "      , title      ";
             query += "      , content    ";
-            query += "      , name       ";
+            query += "      , username   ";
             query += "      , datetime   ";
             query += "      , hit        ";
             query += "   FROM post_board ";
@@ -21,7 +21,7 @@ export class DbCrudModel {
         let query  = " SELECT idx        ";
             query += "      , title      ";
             query += "      , content    ";
-            query += "      , name       ";
+            query += "      , username   ";
             query += "      , datetime   ";
             query += "      , hit        ";
             query += "   FROM post_board ";
@@ -32,13 +32,13 @@ export class DbCrudModel {
     }
 
     create(params: DbCrudType): void {
-        let query  = " INSERT INTO post_board ( title,  content,  name, datetime, hit) ";
-            query += "      VALUES            (:title, :content, :name, datetime('now', 'localtime'), 0) ";
+        let query  = " INSERT INTO post_board ( title,  content,  username, datetime, hit) ";
+            query += "      VALUES            (:title, :content, :username, datetime('now', 'localtime'), 0) ";
         
         this.db.prepare(query).run({
-             title   : params.title
-            ,content : params.content
-            ,name    : params.name
+             title    : params.title
+            ,content  : params.content
+            ,username : params.username
         });
     }
 
@@ -49,17 +49,17 @@ export class DbCrudModel {
     }
 
     update(params: DbCrudType): void {
-        let query    = " UPDATE post_board         ";
-            query   += "    SET title   = :title   ";
-            query   += "      , content = :content ";
-            query   += "      , name    = :name    ";
-            query   += "  WHERE idx     = :idx     ";
+        let query    = " UPDATE post_board           ";
+            query   += "    SET title    = :title    ";
+            query   += "      , content  = :content  ";
+            query   += "      , username = :username ";
+            query   += "  WHERE idx      = :idx      ";
 
         this.db.prepare(query).run({
-            title   : params.title,
-            content : params.content,
-            name    : params.name,
-            idx     : params.idx
+            title    : params.title,
+            content  : params.content,
+            username : params.username,
+            idx      : params.idx
         });
     }
 
@@ -70,13 +70,13 @@ export class DbCrudModel {
     }
 
     createReturnIdx(params: DbCrudType): number {
-        let query  = " INSERT INTO post_board ( title,  content,  name, datetime, hit) ";
-            query += "      VALUES            (:title, :content, :name, datetime('now', 'localtime'), 0) ";
+        let query  = " INSERT INTO post_board ( title,  content,  username, datetime, hit) ";
+            query += "      VALUES            (:title, :content, :username, datetime('now', 'localtime'), 0) ";
         
         let result = this.db.prepare(query).run({
-             title   : params.title
-            ,content : params.content
-            ,name    : params.name
+             title    : params.title
+            ,content  : params.content
+            ,username : params.username
         });
 
         return result.lastInsertRowid as number;

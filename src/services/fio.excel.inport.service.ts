@@ -6,7 +6,7 @@ export class FioExcelInportService {
 
     private fioExcelModel = new FioExcelModel();
 
-    async upload(xlsxBuffer: Buffer): Promise<void> {
+    async upload(xlsxBuffer: ArrayBuffer): Promise<void> {
         let workbook: excel.Workbook = new excel.Workbook();
         await workbook.xlsx.load(xlsxBuffer);
 
@@ -20,10 +20,10 @@ export class FioExcelInportService {
             let row = worksheet.getRow(rowNum);
             let rowData: excel.CellValue[] = [];
 
-            // 고정방식. 무조건 아래의 틀을 지켜야함 (첫번째열 title, 두번째열 name, 세번째열 content)
-            // | title | name  | content |
-            // | ...   | ...   | ...     |
-            // | ...   | ...   | ...     |
+            // 고정방식. 무조건 아래의 틀을 지켜야함 (첫번째열 title, 두번째열 username, 세번째열 content)
+            // | title | username  | content |
+            // | ...   | ...       | ...     |
+            // | ...   | ...       | ...     |
             for (let colNum = 1; colNum <= 3; colNum++) {
                 let cell = row.getCell(colNum);
                 let value: excel.CellValue = cell.value;
@@ -31,9 +31,9 @@ export class FioExcelInportService {
             }
 
             let data: DbCrudType = {
-                title  : rowData[0]?.toString() || '',
-                name   : rowData[1]?.toString() || '',
-                content: rowData[2]?.toString() || ''
+                title    : rowData[0]?.toString() || '',
+                username : rowData[1]?.toString() || '',
+                content  : rowData[2]?.toString() || ''
             };
 
             dataList.push(data);

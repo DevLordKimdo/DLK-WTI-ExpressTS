@@ -5,8 +5,8 @@ export class UixFormModel {
     private db = getDatabase();
 
     createCopy(params: string): void {
-        let query  = " INSERT INTO post_board (title , content , name)               ";
-            query += " SELECT                  title , content , name                ";
+        let query  = " INSERT INTO post_board (title , content , username)           ";
+            query += " SELECT                  title , content , username            ";
             query += "   FROM      post_board                                        ";
             query += "  WHERE      idx        IN (SELECT value FROM json_each(:idx)) ";
 
@@ -16,17 +16,17 @@ export class UixFormModel {
     updateMulti(params: UixFormType): void {
         let query  = " UPDATE post_board SET                   ";
             query += "        title    =   :title              ";
-            query += "      , name     =   :name               ";
+            query += "      , username =   :username           ";
             query += "      , content  =   :content            ";
             query += "      , hit      =   :hit                ";
             query += "  WHERE idx     IN   (SELECT value FROM json_each(:idx)) ";
 
             this.db.prepare(query).run({
-                 title   : params.title
-                ,name    : params.name
-                ,content : params.content
-                ,hit     : params.hit
-                ,idx     : params.checkIdx
+                 title    : params.title
+                ,username : params.username
+                ,content  : params.content
+                ,hit      : params.hit
+                ,idx      : params.checkIdx
             });
     }
 

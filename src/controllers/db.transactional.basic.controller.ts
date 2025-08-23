@@ -18,8 +18,8 @@ export const submit = async (req: Request, res: Response) => {
     try {
         let errorOption: string = req.body.errorOption;
         let transOption: string = req.body.transOption;
-        let {name, title, content} = req.body;
-        let form: DbCrudType = {name, title, content};
+        let {username, title, content} = req.body;
+        let form: DbCrudType = {username, title, content};
         let errorForm: DbCrudType = {};
 
         dbTransactionalBasicService.submit(form, errorForm, errorOption, transOption);

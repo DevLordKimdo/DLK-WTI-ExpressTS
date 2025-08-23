@@ -8,20 +8,20 @@ export class DbTransactionalModel {
         try {
             this.db.prepare('BEGIN TRANSACTION').run();
 
-            let query  = " INSERT INTO post_board ( title,  content,  name, datetime, hit) ";
-                query += "      VALUES            (:title, :content, :name, datetime('now', 'localtime'), 0) ";
+            let query  = " INSERT INTO post_board ( title,  content,  username, datetime, hit) ";
+                query += "      VALUES            (:title, :content, :username, datetime('now', 'localtime'), 0) ";
             
             this.db.prepare(query).run({
-                 title   : params.title
-                ,content : params.content
-                ,name    : params.name
+                 title    : params.title
+                ,content  : params.content
+                ,username : params.username
             });
 
             if(errorOption == 'true') {
                 this.db.prepare(query).run({
-                    title   : errorParams.title
-                    ,content : errorParams.content
-                    ,name    : errorParams.name
+                    title     : errorParams.title
+                    ,content  : errorParams.content
+                    ,username : errorParams.username
                 });
             }
             console.log('DB 작업 완료');

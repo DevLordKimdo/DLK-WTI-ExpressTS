@@ -9,7 +9,7 @@ export class UixPaginationModel {
         let query  = "   SELECT idx            ";
             query += "        , title          ";
             query += "        , content        ";
-            query += "        , name           ";
+            query += "        , username       ";
             query += "        , datetime       ";
             query += "        , hit            ";
             query += "     FROM post_board     ";

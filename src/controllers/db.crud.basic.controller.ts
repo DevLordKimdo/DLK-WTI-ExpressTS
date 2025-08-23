@@ -25,8 +25,8 @@ export const createForm = async (req: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
     try {
-        let { title, content, name } = req.body;
-        let form: DbCrudType = { title, content, name };
+        let { title, content, username } = req.body;
+        let form: DbCrudType = { title, content, username };
         dbCrudBasicService.createPost(form);
         res.redirect('/tmpl' + '/db/crud/basic/list');
     } catch (error) {
@@ -50,8 +50,8 @@ export const read = async (req: Request, res: Response) => {
 export const update = async (req: Request, res: Response) => {
     try {
         let idx : number = parseInt(req.params.idx,10);
-        let { title, content, name } = req.body;
-        let form : DbCrudType = { idx, title, content, name };
+        let { title, content, username } = req.body;
+        let form : DbCrudType = { idx, title, content, username };
         dbCrudBasicService.update(form);
         res.redirect('/tmpl' + '/db/crud/basic/read/' + idx);
     } catch (error) {

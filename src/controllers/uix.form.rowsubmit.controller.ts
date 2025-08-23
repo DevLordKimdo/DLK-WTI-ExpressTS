@@ -16,9 +16,9 @@ export const form = async (req: Request, res: Response) => {
 export const submit = async (req: Request, res: Response) => {
     try {
         let listTitle  : string[] = req.body.title;
-        let listName   : string[] = req.body.name;
+        let listUsername   : string[] = req.body.username;
         let listContent: string[] = req.body.content;
-        let list = uixFormRowSubmitService.submit(listTitle, listName, listContent);
+        let list = uixFormRowSubmitService.submit(listTitle, listUsername, listContent);
         console.log(list);
         res.redirect('/tmpl' + '/uix/form/row-submit/form');
     } catch (error) {
