@@ -1,13 +1,12 @@
-import app from './app';
-import { getServerConfig, getDatabaseConfig } from './config';
+import dotenv           from 'dotenv';
 import { initDatabase } from './database/connection';
 import { setupSchema }  from './database/schema';
 
-const dbConfig  = getDatabaseConfig();
-const svrConfig = getServerConfig();
+// ENV 설정
+const env = process.env.NODE_ENV || 'local';
+dotenv.config({ path: `./.env.${env}` });
 
-const PORT = svrConfig.port;
-
+// 데이터베이스 초기화
 try {
     initDatabase();
     setupSchema();
@@ -16,6 +15,15 @@ try {
     process.exit(1);
 }
 
+// 서버 포트 설정
+const PORT = process.env.SERVER_PORT;
+
+// 앱 설정
+import app from './app';
+
+// ENV 타입 읽기
+const ENV = process.env.ENV_TYPE;
+
 // 웹소켓 설정
 import { createServer } from 'http';
 import { setupWebSocket } from './websocket/web.socket.setup';
@@ -23,5 +31,7 @@ const server = createServer(app);
 setupWebSocket(server);
 
 server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`SERVER is running`);
+    console.log(`SERVER PORT :${PORT}`);
+    console.log(`ENV TYPE: ${ENV}`);
 });

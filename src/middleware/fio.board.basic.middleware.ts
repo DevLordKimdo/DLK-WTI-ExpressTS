@@ -1,6 +1,6 @@
 import multer, { StorageEngine } from 'multer';
 import { Request } from 'express';
-import { fioPath } from '../config';
+const fioPath: string = process.env.FIO_PATH || '';
 
 // multer 설정
 const storage: StorageEngine = multer.diskStorage({

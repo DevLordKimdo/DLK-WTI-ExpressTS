@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { FioCrudBasicService } from '../services/fio.crud.basic.service';
 import { FioCrudType } from '../types/fio.crud.type';
-import { fioPath } from '../config';
 
 const fioCrudBasicService = new FioCrudBasicService();
+const fioPath: string = process.env.FIO_PATH || '';
 
 export const list = async (req: Request, res: Response) => {
     try {

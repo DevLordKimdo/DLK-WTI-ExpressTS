@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { fioPath } from '../config';
 import { FioUpdownBasicService } from '../services/fio.updown.basic.service';
 
 const fioUpdownBasicService = new FioUpdownBasicService();
+const fioPath: string = process.env.FIO_PATH || '';
 
 export const form = async (req: Request, res: Response) => {
     try {

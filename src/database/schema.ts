@@ -6,8 +6,8 @@ export const setupSchema = (): void => {
     const db = getDatabase();
 
     try {
-        // SQL 파일 경로
-        const sqlFilePath = path.join(__dirname, 'StartQuery.sql');
+        // SQL 파일 경로. 서버 root 폴더 최상위에 위치
+        const sqlFilePath = path.join(process.cwd(), 'StartQuery.sql');
         
         // SQL 파일 존재 확인
         if (!fs.existsSync(sqlFilePath)) {
@@ -20,6 +20,7 @@ export const setupSchema = (): void => {
 
         // SQL 실행 (여러 구문을 한번에 실행)
         db.exec(sqlContent);
+        console.log('DB 초기화 완료!');
     } catch (error) {
         console.error('❌ Error executing SQL file:', error);
         throw error;
