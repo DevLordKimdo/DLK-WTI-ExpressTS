@@ -19,6 +19,7 @@ import uixFormInputdisableRoute from './uix.form.inputdisable.route';
 import uixIframeBasicRoute from './uix.iframe.basic.route';
 import uixPopupModalRoute from './uix.popup.modal.route';
 import uixPopupSendvalueRoute from './uix.popup.sendvalue.route';
+import uixPopupTermsRoute from './uix.popup.terms.route';
 import uixPaginationBasicRoute from './uix.pagination.basic.route';
 import wsConnectBasicRoute from './ws.connect.basic.route';
 
@@ -44,6 +45,7 @@ router.use('/tmpl/uix/form/input-disable', uixFormInputdisableRoute);
 router.use('/tmpl/uix/iframe/basic', uixIframeBasicRoute);
 router.use('/tmpl/uix/popup/modal', uixPopupModalRoute);
 router.use('/tmpl/uix/popup/send-value', uixPopupSendvalueRoute);
+router.use('/tmpl/uix/popup/terms', uixPopupTermsRoute);
 router.use('/tmpl/uix/pagination/basic', uixPaginationBasicRoute);
 router.use('/tmpl/ws/connect/basic', wsConnectBasicRoute);
 
