@@ -35,4 +35,11 @@ export class UixFormModel {
 
             this.db.prepare(query).run({ idx : params });
     }
+
+    listUser(): UixFormType[] {
+        let query  = " SELECT username , manages FROM user_account ";
+        
+        const result = this.db.prepare(query).all() as UixFormType[];
+        return result;
+    }
 }
